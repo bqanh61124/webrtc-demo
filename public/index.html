@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebRTC P2P Video Call Demo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+
+        #remote-video-container video {
+            width: 45%;
+            margin: 5px;
+        }
+
+        #join-screen,
+        #controls {
+            margin-bottom: 20px;
+        }
+
+        #join-screen input,
+        #join-screen button,
+        #controls button {
+            padding: 10px;
+            margin: 5px;
+            font-size: 16px;
+        }
+
+        .video-wrapper {
+            display: inline-block;
+            position: relative;
+        }
+
+        .video-wrapper video {
+            width: 100%;
+        }
+
+        .video-wrapper .label {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            padding: 5px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>WebRTC P2P Video Call Demo</h1>
+    <div id="join-screen">
+        <div>
+            <label for="peer-id">Your ID:</label>
+            <input type="text" id="peer-id" readonly>
+        </div>
+        <div>
+            <label for="connect-id">Connect to Peer ID:</label>
+            <input type="text" id="connect-id">
+            <button id="connect-button">Call</button>
+        </div>
+    </div>
+    <div id="controls">
+        <button id="disconnect-button">Disconnect</button>
+        <button id="mute-button">Mute</button>
+        <button id="stop-video-button">Stop Video</button>
+    </div>
+    <div id="remote-video-container"></div>
+    <script src="https://unpkg.com/peerjs@1.5.2/dist/peerjs.min.js"></script> <!-- Thư viện PeerJS từ CDN -->
+    <script src="main.js"></script>
+</body>
+
+</html>
