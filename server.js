@@ -11,6 +11,8 @@ const peerServer = ExpressPeerServer(server, {
 app.use('/peerjs', peerServer);  // Mount PeerServer tại /peerjs
 app.use(express.static('public'));  // Phục vụ file tĩnh từ thư mục public
 
-server.listen(9000, () => {
-    console.log('Server is running on http://localhost:9000');
+// Sử dụng process.env.PORT cho Heroku
+const port = process.env.PORT || 9000;
+server.listen(port, () => {
+    console.log(`Server is running on port ${port}`);
 });
