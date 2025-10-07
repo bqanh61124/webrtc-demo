@@ -12,14 +12,15 @@ navigator.mediaDevices.getUserMedia({ video: true, audio: true })
 
 // Khởi tạo Peer với signaling server
 const peer = new Peer({
-    host: window.location.hostname,  // Tự động dùng domain Heroku (ví dụ: your-app.herokuapp.com)
-    port: window.location.port || 443,  // HTTPS dùng 443
+    host: window.location.hostname,  // Tự động dùng domain Render (ví dụ: webrtc-demo.onrender.com)
+    port: window.location.port || (window.location.protocol === 'https:' ? 443 : 80),  // HTTPS dùng 443, HTTP dùng 80
     path: '/peerjs',
+    secure: window.location.protocol === 'https:',  // Bật secure cho HTTPS trên Render
     config: {
         iceServers: [
             { urls: 'stun:stun.l.google.com:19302' },  // STUN mặc định
             {
-                urls: 'turn:openrelay.metered.ca:80',  // TURN miễn phí (từ Open Relay Project)
+                urls: 'turn:openrelay.metered.ca:80',  // TURN miễn phí
                 username: 'openrelayproject',
                 credential: 'openrelayproject'
             },
@@ -29,7 +30,8 @@ const peer = new Peer({
                 credential: 'openrelayproject'
             }
         ]
-    }
+    },
+    debug: 3  // Bật debug chi tiết để dễ troubleshoot
 });
 
 // Hiển thị ID của peer khi kết nối signaling
